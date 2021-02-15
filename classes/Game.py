@@ -13,6 +13,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.run = None
         self.score = 0
+        self.lives = 3
         pygame.font.init()
         self.scoreFont = pygame.font.SysFont('comicsans', 20)
         self.set_up()
@@ -54,6 +55,7 @@ class Game:
         self.allSprites.draw(self.screen)
         self.draw_grid()
         self.draw_score()
+        self.draw_lives()
         #self.screen.blit(PAC_MAN[0], (TILE_SIZE, TILE_SIZE))
         pygame.display.update()
 
@@ -73,6 +75,13 @@ class Game:
         for hit in hits:
             hit.kill()
             self.score += 1
+
+    def draw_lives(self):
+        img = PAC_MAN[0]
+        for live in range(self.lives):
+            self.screen.blit(img, (WIDTH - img.get_width() - live * img.get_width(), 0))
+
+
 
     def draw_score(self):
         label = self.scoreFont.render(f"SCORE: {self.score}", 1, BLACK, RED)
