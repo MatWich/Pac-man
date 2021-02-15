@@ -120,6 +120,10 @@ class Game:
         if self.player.invincible == True:
             self.invincibility_timer()
 
+        if len(self.food) == 0:
+            self.new_map()
+
+    # nothing lasts forever even pacman invicibility
     def invincibility_timer(self):
         if self.happy_time_timer == None:
             self.happy_time_timer = datetime.datetime.now()
@@ -133,20 +137,18 @@ class Game:
 
 
 
-
+    '''UI'''
     def draw_lives(self):
         img = PAC_MAN[0]
         for live in range(self.lives):
             self.screen.blit(img, (WIDTH - img.get_width() - live * img.get_width(), 0))
-
-
-
+    '''UI'''
     def draw_score(self):
         label = self.scoreFont.render(f"SCORE: {self.score}", 1, WHITE)
         self.screen.blit(label, (0, 0))
 
 
-
+    # helper function
     def draw_grid(self):
         for x in range(0, WIDTH, TILE_SIZE):
             pygame.draw.line(self.screen, RED, (x, 0), (x, HEIGHT))
@@ -156,3 +158,7 @@ class Game:
     def quit(self):
         self.run = False
         pygame.quit()
+
+    # you can jump to the next map
+    def new_map(self):
+        self.set_up()
