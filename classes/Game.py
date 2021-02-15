@@ -5,6 +5,9 @@ from config import *
 from classes.Wall import Wall
 from classes.Food import Food
 from classes.Ghost import Ghost
+from classes.CrossRoad import CrossRoad
+from classes.PowerUp import PowerUp
+import datetime
 from os import path
 
 class Game:
@@ -15,6 +18,7 @@ class Game:
         self.run = None
         self.score = 0
         self.lives = 3
+        self.happy_time_timer = None
         pygame.font.init()
         self.scoreFont = pygame.font.SysFont('comicsans', 20)
         self.set_up()
@@ -26,6 +30,8 @@ class Game:
         self.food = pygame.sprite.Group()
         self.ghosts = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
+        self.crossRoads = pygame.sprite.Group()
+        self.powerUps = pygame.sprite.Group()
 
         for row, tiles in enumerate(self.map.data):
             for col, tile in enumerate(tiles):
@@ -43,6 +49,13 @@ class Game:
 
         if tile == 'G':
             Ghost(self, col, row)
+        if tile == '2':
+            #Food(self, col, row)
+            PowerUp(self, col, row)
+        if tile == '3':
+            CrossRoad(self, col, row)
+            Ghost(self, col, row)
+
 
 
 
@@ -79,6 +92,43 @@ class Game:
         for hit in hits:
             hit.kill()
             self.score += 1
+
+        hits = pygame.sprite.spritecollide(self.player, self.powerUps, True, collide_hit_rect)
+        if hits:
+            for hit in hits:
+                hit.kill()
+                self.player.invincible = True
+                self.invincibility_timer()
+
+        hits = pygame.sprite.spritecollide(self.player, self.ghosts, False, collide_hit_rect)
+        for hit  in hits:
+            if self.player.invincible == True:
+                hit.kill()
+                Ghost(self, 9, 10)
+                self.score += 10
+            else:
+                self.lives -= 1
+                hit.kill()
+                Ghost(self, 9, 10)
+
+            if self.lives <= 0:
+                self.quit()
+        if self.player.invincible == True:
+            self.invincibility_timer()
+
+    def invincibility_timer(self):
+        if self.happy_time_timer == None:
+            self.happy_time_timer = datetime.datetime.now()
+
+
+        duration = datetime.datetime.now() - self.happy_time_timer
+        #print('Duration: ', duration)
+        if duration.seconds >= 5:
+            self.player.invincible = False
+            self.happy_time_timer = None
+
+
+
 
     def draw_lives(self):
         img = PAC_MAN[0]

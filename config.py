@@ -2,6 +2,7 @@ import pygame
 import os
 
 from classes.Ghost import Ghost
+from classes.Player import Player
 
 SCR_SIZE = (WIDTH, HEIGHT) = (600, 400)
 TITLE = "PAC-MAN"
@@ -20,7 +21,7 @@ BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 LIGHTGREY = (100, 100, 100)
 DARKGREY = (40, 40 ,40)
-TILE_SIZE = 30
+TILE_SIZE = 16
 
 # DIRS
 PROJECT_DIR = os.path.dirname(__file__)
@@ -35,7 +36,9 @@ RED_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "red" + str(x) +
 
 PAC_MAN = [pygame.transform.scale(pygame.image.load(IMG_DIR + "pac-man" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(3)]
 
-PLAYER_HIT_RECT = pygame.Rect(0, 0, TILE_SIZE - 2, TILE_SIZE - 2)
+SCARED_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "ghost_scared" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(1)]
+
+PLAYER_HIT_RECT = pygame.Rect(0, 0, TILE_SIZE - 5, TILE_SIZE - 5)
 
 
 
@@ -66,3 +69,4 @@ def collide_with_walls(sprite, group, dir):
             sprite.hit_rect.centery = sprite.pos.y
             if isinstance(sprite, Ghost):
                 sprite.new_path = True
+
