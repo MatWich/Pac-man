@@ -1,12 +1,15 @@
 import pygame
 import os
 
+from classes.Ghost import Ghost
+
 SCR_SIZE = (WIDTH, HEIGHT) = (600, 400)
 TITLE = "PAC-MAN"
 BG_COLOR = (200, 200, 200)
 FPS = 60
 
 PLAYER_SPEED = 100
+GHOST_SPEED = 80
 
 # Colors
 RED = (255, 0, 0)
@@ -49,6 +52,9 @@ def collide_with_walls(sprite, group, dir):
                 sprite.pos.x = hits[0].rect.right + sprite.hit_rect.width / 2
             sprite.vel.x = 0
             sprite.hit_rect.centerx = sprite.pos.x
+            if isinstance(sprite, Ghost):
+                sprite.new_path = True
+
     if dir == 'y':
         hits = pygame.sprite.spritecollide(sprite, group, False, collide_hit_rect)
         if hits:
@@ -58,3 +64,5 @@ def collide_with_walls(sprite, group, dir):
                 sprite.pos.y = hits[0].rect.bottom + sprite.hit_rect.height / 2
             sprite.vel.y = 0
             sprite.hit_rect.centery = sprite.pos.y
+            if isinstance(sprite, Ghost):
+                sprite.new_path = True

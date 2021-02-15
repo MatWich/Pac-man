@@ -4,6 +4,7 @@ from classes.Player import Player
 from config import *
 from classes.Wall import Wall
 from classes.Food import Food
+from classes.Ghost import Ghost
 from os import path
 
 class Game:
@@ -39,6 +40,9 @@ class Game:
 
         if tile == '1':
             Food(self, col, row)
+
+        if tile == 'G':
+            Ghost(self, col, row)
 
 
 
@@ -85,7 +89,7 @@ class Game:
 
     def draw_score(self):
         label = self.scoreFont.render(f"SCORE: {self.score}", 1, BLACK, RED)
-        self.screen.blit(label, (0 , 0))
+        self.screen.blit(label, (0, 0))
 
 
 
