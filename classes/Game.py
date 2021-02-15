@@ -20,7 +20,7 @@ class Game:
         self.lives = 3
         self.happy_time_timer = None
         pygame.font.init()
-        self.scoreFont = pygame.font.SysFont('comicsans', 20)
+        self.scoreFont = pygame.font.SysFont(ARCADE_FONT, 20)
         self.set_up()
 
     def set_up(self):
@@ -70,9 +70,10 @@ class Game:
 
 
     def draw(self):
-        self.screen.fill(BG_COLOR)
+        #self.screen.fill(BG_COLOR)
+        self.screen.blit(BG, (0, 0))
         self.allSprites.draw(self.screen)
-        self.draw_grid()
+        #self.draw_grid()
         self.draw_score()
         self.draw_lives()
         #self.screen.blit(PAC_MAN[0], (TILE_SIZE, TILE_SIZE))
@@ -141,7 +142,7 @@ class Game:
 
 
     def draw_score(self):
-        label = self.scoreFont.render(f"SCORE: {self.score}", 1, BLACK, RED)
+        label = self.scoreFont.render(f"SCORE: {self.score}", 1, WHITE)
         self.screen.blit(label, (0, 0))
 
 

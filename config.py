@@ -3,8 +3,8 @@ import os
 
 from classes.Ghost import Ghost
 from classes.Player import Player
-
-SCR_SIZE = (WIDTH, HEIGHT) = (600, 400)
+TILE_SIZE = 16
+SCR_SIZE = (WIDTH, HEIGHT) = (TILE_SIZE * 19, TILE_SIZE * 23)
 TITLE = "PAC-MAN"
 BG_COLOR = (200, 200, 200)
 FPS = 60
@@ -21,14 +21,19 @@ BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 LIGHTGREY = (100, 100, 100)
 DARKGREY = (40, 40 ,40)
-TILE_SIZE = 16
+POWER_UP_COLOR = (230, 230, 230)
 
 # DIRS
 PROJECT_DIR = os.path.dirname(__file__)
 IMG_DIR = os.path.join(PROJECT_DIR, 'imgs/')
 
+# FONTS
+
+ARCADE_FONT = 'Press Start 2P'
+
 # IMGS
 #######################################
+BG = pygame.transform.scale(pygame.image.load(IMG_DIR + 'bg.png'), (WIDTH, HEIGHT))
 CYAN_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "cyan" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(4)]
 PINK_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "pink" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(4)]
 GREEN_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "green" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(4)]
