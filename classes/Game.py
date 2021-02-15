@@ -12,7 +12,9 @@ class Game:
         pygame.display.set_caption(TITLE)
         self.clock = pygame.time.Clock()
         self.run = None
-
+        self.score = 0
+        pygame.font.init()
+        self.scoreFont = pygame.font.SysFont('comicsans', 20)
         self.set_up()
 
     def set_up(self):
@@ -21,6 +23,7 @@ class Game:
         self.allSprites = pygame.sprite.Group()
         self.food = pygame.sprite.Group()
         self.ghosts = pygame.sprite.Group()
+        self.walls = pygame.sprite.Group()
 
         for row, tiles in enumerate(self.map.data):
             for col, tile in enumerate(tiles):
@@ -50,6 +53,7 @@ class Game:
         self.screen.fill(BG_COLOR)
         self.allSprites.draw(self.screen)
         self.draw_grid()
+        self.draw_score()
         #self.screen.blit(PAC_MAN[0], (TILE_SIZE, TILE_SIZE))
         pygame.display.update()
 
@@ -64,6 +68,17 @@ class Game:
 
     def update(self):
         self.allSprites.update()
+
+        hits = pygame.sprite.spritecollide(self.player, self.food, False, collide_hit_rect)
+        for hit in hits:
+            hit.kill()
+            self.score += 1
+
+    def draw_score(self):
+        label = self.scoreFont.render(f"SCORE: {self.score}", 1, BLACK, RED)
+        self.screen.blit(label, (0 , 0))
+
+
 
     def draw_grid(self):
         for x in range(0, WIDTH, TILE_SIZE):

@@ -10,6 +10,8 @@ class Player(pygame.sprite.Sprite):
         self.image.fill(BLUE)
         self.image.convert_alpha()
         self.rect = self.image.get_rect()
+        self.hit_rect = PLAYER_HIT_RECT
+        self.hit_rect.center = self.rect.center
         #self.rect.x = x
         #self.rect.y = y
         self.pos = vec(x, y) * TILE_SIZE
@@ -21,6 +23,12 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = self.pos
         self.pos += self.vel * self.game.dt
+
+        self.hit_rect.centerx = self.pos.x
+        collide_with_walls(self, self.game.walls, 'x')
+        self.hit_rect.centery = self.pos.y
+        collide_with_walls(self, self.game.walls, 'y')
+        self.rect.center = self.hit_rect.center
 
 
     def draw(self, screen):

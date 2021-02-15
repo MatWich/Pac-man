@@ -8,6 +8,7 @@ class Food(pygame.sprite.Sprite):
         self.image.fill(YELLOW)
         self.image.convert_alpha()
         self.rect = self.image.get_rect()
+        self.hit_rect = self.rect
 
         self.game = game
         self.rect.x = x * TILE_SIZE + TILE_SIZE / 2

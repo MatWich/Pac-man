@@ -3,7 +3,7 @@ from config import *
 
 class Wall(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
-        pygame.sprite.Sprite.__init__(self, game.allSprites)
+        pygame.sprite.Sprite.__init__(self, game.allSprites, game.walls)
         self.image = pygame.Surface((TILE_SIZE, TILE_SIZE))
         self.image.fill(RED)
         self.image.convert_alpha()
