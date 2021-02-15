@@ -33,14 +33,16 @@ CYAN_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "cyan" + str(x)
 PINK_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "pink" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(4)]
 GREEN_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "green" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(4)]
 RED_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "red" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(4)]
+ORANGE_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "orange" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(4)]
+ALL_GHOSTS = {0: CYAN_GHOST, 1: PINK_GHOST, 2: GREEN_GHOST, 3: RED_GHOST, 4: ORANGE_GHOST}
 
 PAC_MAN = [pygame.transform.scale(pygame.image.load(IMG_DIR + "pac-man" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(3)]
 
-SCARED_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "ghost_scared" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(1)]
+SCARED_GHOST = [pygame.transform.scale(pygame.image.load(IMG_DIR + "ghost_scared" + str(x) + ".png"), (TILE_SIZE, TILE_SIZE)) for x in range(2)]
 
-PLAYER_HIT_RECT = pygame.Rect(0, 0, TILE_SIZE - 5, TILE_SIZE - 5)
+PLAYER_HIT_RECT = pygame.Rect(0, 0, TILE_SIZE - 7, TILE_SIZE - 7)
 
-
+print(len(PAC_MAN))
 
 def collide_hit_rect(sp1, sp2):
     return sp1.hit_rect.colliderect(sp2.rect)

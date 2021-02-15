@@ -49,12 +49,14 @@ class Game:
 
         if tile == 'G':
             Ghost(self, col, row)
+
+
         if tile == '2':
-            #Food(self, col, row)
             PowerUp(self, col, row)
         if tile == '3':
             CrossRoad(self, col, row)
             Ghost(self, col, row)
+
 
 
 
@@ -113,6 +115,7 @@ class Game:
 
             if self.lives <= 0:
                 self.quit()
+
         if self.player.invincible == True:
             self.invincibility_timer()
 

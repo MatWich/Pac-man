@@ -3,9 +3,9 @@
 # TO DO
 - [x] WALL sprite
 - [x] Player movement
-- [ ] PAC-MAN food 
+- [x] PAC-MAN food 
 - [ ] PAC-MAN sprite
 - [ ] GHOSTS sprites
-- [ ] Collision detection
-- [ ] Maps 
-- [ ] AI movement
+- [x] Collision detection
+- [x] Maps 
+- [ ] AI movement 
